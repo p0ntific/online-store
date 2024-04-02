@@ -1,4 +1,4 @@
-const { Brand } = require("../models/models");
+const { Brand, Device } = require("../models/models");
 
 class BrandController {
   async create(req, res) {
@@ -9,6 +9,13 @@ class BrandController {
   async getAll(req, res) {
     const brand = await Brand.findAll();
     return res.json(brand);
+  }
+  async deleteBrand(req, res) {
+    const { id } = req.params;
+    await Brand.destroy({
+      where: { id },
+    });
+    return res.json({ message: "deleted successfully" });
   }
 }
 
